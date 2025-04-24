@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Colaboradores</title>
+    <link rel="stylesheet" href="{% static 'estilo.css' %}">
+</head>
+
+<body>
+    <header>
+        <h1>Lista de Colaboradores</h1>
+    </header>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Idade</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th>Cargo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for colaborador in colaboradores %}
+            <tr>
+                <td>{{ colaborador.nome }}</td>
+                <td>{{ colaborador.idade }}</td>
+                <td>{{ colaborador.email }}</td>
+                <td>{{ colaborador.telefone }}</td>
+                <td>{{ colaborador.cargo }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">Nenhum colaborador cadastrado.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <footer>
+        <a href="/cadastro/">Cadastrar novo colaborador</a>
+        <a href="{% url 'lista_colaboradores' %}">Menu inicial</a>
+    </footer>
+</body>
+
+</html>
