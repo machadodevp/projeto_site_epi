@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from .models import Colaborador, Equipamento
+
 
 # Create your views here.
 
@@ -42,5 +44,25 @@ def lista_colaboradores(request):
 # -----------------EQUIPAMENTOS-------------------
 
 def cadastro_equipamento(request):
+    if request.method == 'POST':
+        nome = request.POST.get('nome')
+        tipo = request.POST.get('tipo')
+        numero_serie = request.POST.get('numero_serie')
+
+        equipamento = Equipamento(
+            nome=nome,
+            tipo=tipo,
+            numero_serie=numero_serie
+        )
+        equipamento.save()
+
+        return redirect('lista_equipamentos')  # Redireciona para a lista
+
     return render(request, 'cadastro/cadastro_equipamento.html')
+
+
+def lista_equipamentos(request):
+    equipamentos = Equipamento.objects.all()
+    return render(request, 'cadastro/lista_equipamentos.html', {'equipamentos': equipamentos})
+
 
