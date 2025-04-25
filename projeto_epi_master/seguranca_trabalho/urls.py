@@ -10,5 +10,11 @@ urlpatterns = [
     # URLS DE EQUIPAMENTOS
     path('cadastro_equipamento/', views.cadastro_equipamento, name='cadastro_equipamento'),
     path('equipamentos/', views.lista_equipamentos, name='lista_equipamentos'),
+     # URL para editar um equipamento
+    path('editar/equipamento/<int:equipamento_id>/', views.editar_equipamento, name='editar_equipamento'),
+    
+    # URL para deletar um equipamento
+    path('deletar/equipamento/<int:equipamento_id>/', views.deletar_equipamento, name='deletar_equipamento'),
+
 
 ]
