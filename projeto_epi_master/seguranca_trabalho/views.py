@@ -172,3 +172,8 @@ def registrar_acao(request):
         return redirect('registrar_acao')
 
     return render(request, 'cadastro/registrar_acao.html', {'colaboradores': colaboradores, 'equipamentos': equipamentos})
+
+   
+def lista_acao(request):
+    acoes = Acao.objects.select_related('equipamento', 'colaborador').all().order_by('-data_emprestimo')
+    return render(request, 'cadastro/lista_acao.html', {'acoes': acoes})

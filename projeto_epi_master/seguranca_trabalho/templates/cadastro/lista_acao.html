@@ -1,0 +1,43 @@
+{% extends 'home.html' %}
+{% load static %}
+{% block title%}Relatório{% endblock %}
+{% block conteudo %}
+<link rel="stylesheet" href="{% static 'css/lista_acao.css' %}">
+
+<h2>Lista de Ações Registradas</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Equipamento</th>
+            <th>Colaborador</th>
+            <th>Data Empréstimo</th>
+            <th>Data Prevista</th>
+            <th>Data Devolução</th>
+            <th>Status</th>
+            <th>Condições</th>
+            <th>Observações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for acao in acoes %}
+        <tr>
+            <td>{{ acao.equipamento.nome }}</td>
+            <td>{{ acao.colaborador.nome }}</td>
+            <td>{{ acao.data_emprestimo|date:"d/m/Y" }}</td>
+            <td>{{ acao.data_prevista_devolucao|date:"d/m/Y" }}</td>
+            <td>{{ acao.data_devolucao|date:"d/m/Y"|default:"-" }}</td>
+            <td>{{ acao.status }}</td>
+            <td>{{ acao.condicoes_emprestimo }}</td>
+            <td>{{ acao.observacao|default:"-" }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="8">Nenhuma ação registrada ainda.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'registrar_acao' %}">Registrar nova ação</a>
+{% endblock %}

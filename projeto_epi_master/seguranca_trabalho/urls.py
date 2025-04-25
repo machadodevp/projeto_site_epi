@@ -23,6 +23,6 @@ urlpatterns = [
 
     # URL tela de controle
     path('registrar_acao/', views.registrar_acao, name='registrar_acao'),
-
+    path('acoes/', views.lista_acao, name='lista_acao'),
 
 ]
