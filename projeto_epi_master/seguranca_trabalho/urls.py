@@ -21,5 +21,8 @@ urlpatterns = [
     # URL para deletar um equipamento
     path('deletar/equipamento/<int:equipamento_id>/', views.deletar_equipamento, name='deletar_equipamento'),
 
+    # URL tela de controle
+    path('registrar_acao/', views.registrar_acao, name='registrar_acao'),
+
 
 ]

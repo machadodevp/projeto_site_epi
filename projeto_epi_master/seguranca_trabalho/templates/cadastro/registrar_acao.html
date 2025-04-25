@@ -1,0 +1,73 @@
+{% extends "home.html" %}
+{% load static %}
+{% block title %}Tela de controle{% endblock  %}
+{% block conteudo  %}
+<link rel="stylesheet" href="{% static 'css/registrar_acao.css' %}">
+
+<div class="form-container">
+  <h2>Registrar Ação</h2>
+  <form method="POST">
+    {% csrf_token %}
+
+    <label>Equipamento:</label>
+    <select name="equipamento" required>
+      <option value="">Selecione</option>
+      {% for equipamento in equipamentos %}
+      <option value="{{ equipamento.id }}">{{ equipamento.nome }}</option>
+      {% endfor %}
+    </select>
+
+    <label>Colaborador:</label>
+    <select name="colaborador" required>
+      <option value="">Selecione</option>
+      {% for colaborador in colaboradores %}
+      <option value="{{ colaborador.id }}">{{ colaborador.nome }}</option>
+      {% endfor %}
+    </select>
+
+    <label>Data do Empréstimo:</label>
+    <input type="date" name="data_emprestimo" required>
+
+    <label>Data Prevista de Devolução:</label>
+    <input type="date" name="data_prevista_devolucao" required>
+
+    <label>Status:</label>
+    <select name="status" id="status" required onchange="mostrarCampos()">
+      <option value="">Selecione</option>
+      <option value="Emprestado">Emprestado</option>
+      <option value="Em uso">Em uso</option>
+      <option value="Fornecido">Fornecido</option>
+      <option value="Devolvido">Devolvido</option>
+      <option value="Danificado">Danificado</option>
+      <option value="Perdido">Perdido</option>
+    </select>
+
+    <label>Condições do Equipamento:</label>
+    <textarea name="condicoes_emprestimo" required></textarea>
+
+    <div id="campos-danificado" style="display: none;">
+      <label>Data da Devolução:</label>
+      <input type="date" name="data_devolucao">
+
+      <label>Observação:</label>
+      <textarea name="observacao"></textarea>
+    </div>
+
+    <button type="submit">Salvar</button>
+  </form>
+</div>
+
+<script>
+  function mostrarCampos() {
+    const status = document.getElementById("status").value;
+    const campos = document.getElementById("campos-danificado");
+
+    if (status === "Danificado" || status === "Perdido") {
+      campos.style.display = "block";
+    } else {
+      campos.style.display = "none";
+    }
+  }
+</script>
+{% endblock  %}
+

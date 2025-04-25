@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .models import Colaborador, Equipamento
+from .models import Colaborador, Equipamento, Acao
 
 
 # Página inicial
@@ -135,3 +135,40 @@ def deletar_equipamento(request, equipamento_id):
     equipamento.delete()
     messages.success(request, 'Equipamento deletado com sucesso!')
     return redirect('lista_equipamentos')
+
+#--------------Tela de controle-----------------------
+
+
+
+def registrar_acao(request):
+    colaboradores = Colaborador.objects.all()
+    equipamentos = Equipamento.objects.all()
+
+    if request.method == 'POST':
+        equipamento_id = request.POST.get('equipamento')
+        colaborador_id = request.POST.get('colaborador')
+        data_emprestimo = request.POST.get('data_emprestimo')
+        data_prevista = request.POST.get('data_prevista_devolucao')
+        status = request.POST.get('status')
+        condicoes = request.POST.get('condicoes_emprestimo')
+        data_devolucao = request.POST.get('data_devolucao') or None
+        observacao = request.POST.get('observacao') or None
+
+        if not equipamento_id or not colaborador_id or not data_emprestimo or not data_prevista or not status or not condicoes:
+            messages.error(request, "Preencha todos os campos obrigatórios.")
+            return redirect('registrar_acao')
+
+        acao = Acao.objects.create(
+            equipamento_id=equipamento_id,
+            colaborador_id=colaborador_id,
+            data_emprestimo=data_emprestimo,
+            data_prevista_devolucao=data_prevista,
+            status=status,
+            condicoes_emprestimo=condicoes,
+            data_devolucao=data_devolucao,
+            observacao=observacao
+        )
+        messages.success(request, "Ação registrada com sucesso!")
+        return redirect('registrar_acao')
+
+    return render(request, 'cadastro/registrar_acao.html', {'colaboradores': colaboradores, 'equipamentos': equipamentos})
