@@ -1,36 +1,24 @@
+{% extends "home.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="pt-br">
+{% block conteudo %}
+<link rel="stylesheet" href="{% static "css/editar_equipamento.css"%}">
+<div class="form-container">
+  <h2>Editar Equipamento</h2>
+  <form method="POST">
+    {% csrf_token %}
+    <label>Nome:</label>
+    <input type="text" name="nome" value="{{ equipamento.nome }}" required>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Equipamento</title>
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-</head>
+    <label>Tipo:</label>
+    <input type="text" name="tipo" value="{{ equipamento.tipo }}" required>
 
-<body>
-    <header>
-        <h1>Editar Equipamento</h1>
-    </header>
+    <label>Número de Série:</label>
+    <input type="text" name="numero_serie" value="{{ equipamento.numero_serie }}" required>
 
-    <div class="form-container">
-        <form method="POST">
-            {% csrf_token %}
-            
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" value="{{ equipamento.nome }}" required>
+    <label>Fabricante:</label>
+    <input type="text" name="fabricante" value="{{ equipamento.fabricante }}" required>
 
-            <label for="tipo">Tipo:</label>
-            <input type="text" id="tipo" name="tipo" value="{{ equipamento.tipo }}" required>
-
-            <label for="numero_serie">Número de Série:</label>
-            <input type="text" id="numero_serie" name="numero_serie" value="{{ equipamento.numero_serie }}" required>
-
-            <button type="submit">Atualizar Equipamento</button>
-        </form>
-    </div>
-
-</body>
-
-</html>
+    <button type="submit">Atualizar</button>
+  </form>
+</div>
+{% endblock %}

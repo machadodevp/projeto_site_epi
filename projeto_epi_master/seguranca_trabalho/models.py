@@ -14,8 +14,6 @@ class Colaborador(models.Model):
     
     # cadastro equimento
 
-    from django.db import models
-
 class Equipamento(models.Model):
     # Definindo os campos do modelo de Equipamento
     nome = models.CharField(max_length=100, verbose_name="Nome do Equipamento")

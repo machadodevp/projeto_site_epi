@@ -1,39 +1,32 @@
 {% extends "home.html" %}
 {% load static %}
-{% block title %}Lista de Colaborador{% endblock  %}
 {% block conteudo %}
+<h2>Lista de Colaboradores</h2>
 <link rel="stylesheet" href="{% static 'css/lista_colaboradores.css'%}">
-   
+<a href="{% url 'cadastro_colaborador' %}">+ Novo Colaborador</a>
 <table>
-    <thead>
-        <tr>
-            <th>Nome</th>
-            <th>Idade</th>
-            <th>Email</th>
-            <th>Telefone</th>
-            <th>Cargo</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for colaborador in colaboradores %}
-        <tr>
-            <td>{{ colaborador.nome }}</td>
-            <td>{{ colaborador.idade }}</td>
-            <td>{{ colaborador.email }}</td>
-            <td>{{ colaborador.telefone }}</td>
-            <td>{{ colaborador.cargo }}</td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="5">Nenhum colaborador cadastrado.</td>
-        </tr>
-        {% endfor %}
-    </tbody>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Email</th>
+      <th>Cargo</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for c in colaboradores %}
+    <tr>
+      <td>{{ c.nome }}</td>
+      <td>{{ c.email }}</td>
+      <td>{{ c.cargo }}</td>
+      <td>
+        <a href="{% url 'editar_colaborador' c.id %}">Editar</a> |
+        <a href="{% url 'deletar_colaborador' c.id %}">Deletar</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="4">Nenhum colaborador cadastrado.</td></tr>
+    {% endfor %}
+  </tbody>
 </table>
-
-<footer>
-    <a href="/cadastro/">Cadastrar novo colaborador</a>
-    <a href="{% url 'home' %}">Menu inicial</a>
-</footer>
-
-{% endblock  %}
+{% endblock %}

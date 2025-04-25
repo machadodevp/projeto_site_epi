@@ -45,7 +45,33 @@ def lista_colaboradores(request):
     colaboradores = Colaborador.objects.all().order_by('nome')
     return render(request, 'cadastro/lista_colaboradores.html', {'colaboradores': colaboradores})
 
+# Editar
+def editar_colaborador(request, colaborador_id):
+    colaborador = get_object_or_404(Colaborador, id=colaborador_id)
 
+    if request.method == 'POST':
+        colaborador.nome = request.POST.get('nome')
+        colaborador.idade = request.POST.get('idade')
+        colaborador.email = request.POST.get('email')
+        colaborador.telefone = request.POST.get('telefone')
+        colaborador.cargo = request.POST.get('cargo')
+        colaborador.save()
+        messages.success(request, 'Colaborador atualizado com sucesso!')
+        return redirect('lista_colaboradores')
+
+    return render(request, 'cadastro/colaborador_form.html', {'colaborador': colaborador})
+
+
+# Deletar
+def deletar_colaborador(request, colaborador_id):
+    colaborador = get_object_or_404(Colaborador, id=colaborador_id)
+    
+    if request.method == 'POST':
+        colaborador.delete()
+        messages.success(request, 'Colaborador deletado com sucesso!')
+        return redirect('lista_colaboradores')
+    
+    return render(request, 'cadastro/confirmar_delete.html', {'colaborador': colaborador})
 # ----------------- EQUIPAMENTO -------------------
 
 def cadastro_equipamento(request):
