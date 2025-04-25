@@ -1,36 +1,26 @@
-/* estilo.css */
+/* Estilos gerais para o corpo da página */
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f2f5;
-    margin: 0;
-    padding: 0;
-}
-
-header {
-    background-color: #0d6efd;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
+/* Container do formulário */
 .form-container {
-    background-color: white;
+    background-color: #ffffff;
     max-width: 600px;
-    margin: 30px auto;
-    padding: 30px;
+    width: 100%; /* Faz com que o formulário ocupe a largura máxima dentro do limite */
+    padding: 40px;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
 }
 
+
+/* Estilo das labels */
 label {
     display: block;
-    margin-top: 20px;
+    margin-top: 15px;
     font-weight: bold;
     color: #333;
 }
 
+/* Estilo dos inputs (campos de texto, email, telefone, etc.) */
 input[type="text"],
 input[type="email"],
 input[type="number"] {
@@ -43,14 +33,16 @@ input[type="number"] {
     transition: border 0.3s;
 }
 
+/* Estilo ao focar nos inputs (quando o usuário clica) */
 input:focus {
     border-color: #0d6efd;
     outline: none;
 }
 
+/* Estilo do botão de envio */
 button {
-    margin-top: 25px;
-    padding: 12px;
+    margin-top: 30px;
+    padding: 14px;
     width: 100%;
     background-color: #0d6efd;
     color: white;
@@ -58,9 +50,24 @@ button {
     border-radius: 6px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
 }
 
+/* Efeito de hover para o botão */
 button:hover {
     background-color: #084fc7;
+}
+
+/* Estilo do link de voltar */
+.voltar {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+/* Efeito de hover para o link de voltar */
+.voltar:hover {
+    text-decoration: underline;
 }

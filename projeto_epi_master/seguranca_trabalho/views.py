@@ -6,7 +6,7 @@ from .models import Colaborador, Equipamento
 # Página inicial
 def home(request):
     equipamentos = Equipamento.objects.all()
-    return render(request, 'cadastro/home.html', {'equipamentos': equipamentos})
+    return render(request, 'home.html', {'equipamentos': equipamentos})
 
 
 # ----------------- COLABORADOR -------------------
