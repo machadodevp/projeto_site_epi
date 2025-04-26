@@ -39,8 +39,8 @@
                     <li><a class="dropdown-item" href="{% url 'cadastro_equipamento'%}">Cadastro de EPIs</a></li>
                     <li><a class="dropdown-item" href="{% url 'lista_equipamentos'%}">Lista de Equipamentos</a></li>
                     <!-- {% for equipamento in equipamentos %} -->
-                    <li><a class="dropdown-item" href="#">Editar</a></li>
-                    <li><a href="{% url 'deletar_equipamento' equipamento.id %}" onclick="return confirm('Tem certeza que deseja deletar?');">Deletar</a></li>
+                    {% comment %} <li><a class="dropdown-item" href="#">Editar</a></li>
+                    <li><a href="{% url 'deletar_equipamento' equipamento.id %}" onclick="return confirm('Tem certeza que deseja deletar?');">Deletar</a></li> {% endcomment %}
                     <!-- {% empty %} -->
                     <li><a class="dropdown-item" href="#">Nenhum equipamento disponível</a></li>
                     <!-- {% endfor %} -->
