@@ -3,6 +3,15 @@
 {% block conteudo %}
 <link rel="stylesheet" href="{% static "css/lista_equipamentos.css" %}">
 <h2>Lista de Equipamentos</h2>
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
 <a href="{% url 'cadastro_equipamento' %}">+ Novo Equipamento</a>
 <table>
   <thead>

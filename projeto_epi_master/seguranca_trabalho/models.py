@@ -5,20 +5,21 @@ from django.utils import timezone
 
 class Colaborador(models.Model):
     nome = models.CharField(max_length=100)
-    idade = models.IntegerField()
-    email = models.EmailField()
-    telefone = models.CharField(max_length=15)
-    cargo = models.CharField(max_length=50)
+    idade = models.IntegerField(default=0)
+    email = models.EmailField(default='sem_email@exemplo.com')
+    telefone = models.CharField(max_length=15, default='0000-0000')
+    cargo = models.CharField(max_length=50, default='Sem cargo')
+
 
     def __str__(self):
         return self.nome
-    
+
     # cadastro equimento
 
 class Equipamento(models.Model):
     # Definindo os campos do modelo de Equipamento
     nome = models.CharField(max_length=100, verbose_name="Nome do Equipamento")
-    tipo = models.CharField(max_length=100, verbose_name="Tipo de Equipamento")
+    tipo = models.CharField(max_length=100, verbose_name="Tipo de Equipamento", default="Desconhecido")
     numero_serie = models.CharField(max_length=100, default='DEFAULT123')
     fabricante = models.CharField(max_length=100, default='DEFAULT123')
    
@@ -29,22 +30,8 @@ class Equipamento(models.Model):
         verbose_name = "Equipamento"
         verbose_name_plural = "Equipamentos"
 
-# -----------------Tela de controle de epi-------------------------------
 
 
-class Colaborador(models.Model):
-    nome = models.CharField(max_length=100)
-    # ... outros campos, se tiver
-
-    def __str__(self):
-        return self.nome
-
-class Equipamento(models.Model):
-    nome = models.CharField(max_length=100)
-    # ... outros campos, se tiver
-
-    def __str__(self):
-        return self.nome
 
 STATUS_CHOICES = [
     ('Emprestado', 'Emprestado'),
@@ -55,6 +42,7 @@ STATUS_CHOICES = [
     ('Perdido', 'Perdido'),
 ]
 
+# -----------------Tela de controle de epi-------------------------------
 class Acao(models.Model):
     equipamento = models.ForeignKey(Equipamento, on_delete=models.CASCADE)
     colaborador = models.ForeignKey(Colaborador, on_delete=models.CASCADE)
